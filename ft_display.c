@@ -1,37 +1,9 @@
 #include "ft_printf.h"
 
-unsigned int	ft_strlen(const char *s)
-{
-	unsigned int i;
-
-	i = 0;
-	while (s[i])
-	{
-		i++;
-	}
-	return (i);
-}
-
-int	ft_countnum(int a)
-{
-	int	j;
-	unsigned int	i;
-
-	j = 0;
-	i = 1;
-	if (a < 0)
-		a *= -1;
-	while (a / i > 0)
-	{
-		i *= 10;
-		j++;
-	}
-	return (j);
-}
-
-void	ft_putchar(char c)
+unsigned int	ft_putchar(char c)
 {
 	write(1, &c, 1);
+	return (1);
 }
 
 unsigned int	ft_putstr(const char *s)
@@ -85,6 +57,64 @@ unsigned int	ft_putnbr(int nb)
 		j++;
 		a /= 10;
 		ft_putchar((nb2 / a) % 10 + '0');
+	}
+	return (j);
+}
+
+unsigned int	ft_putunsigned(unsigned int nb)
+{
+	unsigned long	a;
+	unsigned long	nb2;
+	unsigned int	j;
+
+	a = 1;
+	nb2 = nb;
+	j = 0;
+	if (nb2 < 0)
+	{
+		return (0);
+	}
+	if (nb2 == 0)
+	{
+		return (ft_putchar('0'));
+	}
+	while (nb2 / a > 0)
+	{
+		a *= 10;
+	}
+	while (a > 1)
+	{
+		j++;
+		a /= 10;
+		ft_putchar((nb2 / a) % 10 + '0');
+	}
+	return (j);
+}
+
+unsigned int	ft_putnbr_base(unsigned int nbr, char *base)
+{
+	unsigned int	base_len;
+	unsigned int	denom;
+	long			nbr2;
+	unsigned int	j;
+
+	base_len = ft_strlen(base);
+	denom = 1;
+	nbr2 = nbr;
+	j = 0;
+	if (nbr2 < 0)
+	{
+		return (0);
+	}
+	while (nbr2 / denom / base_len > 0)
+	{
+		denom *= base_len;
+	}
+	while (denom > 0)
+	{
+		j++;
+		ft_putchar(base[nbr2 / denom % base_len]);
+		denom /= base_len;
 	}
 	return (j);
 }

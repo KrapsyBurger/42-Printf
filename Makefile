@@ -1,5 +1,6 @@
 SRCS = ft_printf.c\
-ft_display.c
+ft_display.c\
+ft_utility.c
 
  OBJS        = ${SRCS:.c=.o}
 
