@@ -13,7 +13,7 @@ unsigned int	ft_putstr(const char *s)
 	i = 0;
 	if (s == NULL)
 	{
-		write(1, "(null)", 7);
+		write(1, "(null)", 6);
 		return (6);
 	}
 	while (s[i])
@@ -101,6 +101,34 @@ unsigned int	ft_putnbr_base(unsigned int nbr, char *base)
 	base_len = ft_strlen(base);
 	denom = 1;
 	nbr2 = nbr;
+	j = 0;
+	if (nbr2 < 0)
+	{
+		return (0);
+	}
+	while (nbr2 / denom / base_len > 0)
+	{
+		denom *= base_len;
+	}
+	while (denom > 0)
+	{
+		j++;
+		ft_putchar(base[nbr2 / denom % base_len]);
+		denom /= base_len;
+	}
+	return (j);
+}
+
+unsigned int	ft_putnbr_base_pointer(unsigned long long a, char *base)
+{
+	unsigned int	base_len;
+	unsigned int	denom;
+	unsigned long long			nbr2;
+	unsigned int	j;
+
+	base_len = ft_strlen(base);
+	denom = 1;
+	nbr2 = a;
 	j = 0;
 	if (nbr2 < 0)
 	{

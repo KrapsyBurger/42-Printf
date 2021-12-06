@@ -12,5 +12,6 @@ int 			ft_printf(const char *s, ...);
 unsigned int	ft_strlen(const char *s);
 unsigned int	ft_putunsigned(unsigned int nb);
 unsigned int	ft_putnbr_base(unsigned int nbr, char *base);
+unsigned int	ft_putnbr_base_pointer(unsigned long long a, char *base);
 
 #endif
